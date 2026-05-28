@@ -25,30 +25,44 @@
 }
 
 body{
+
   min-height:100vh;
+
   padding:25px;
+
   background:#fdf6e3;
 
-  /* ẢNH SHIN LOCAL */
+  /* ẢNH SHIN */
   background-image:url('./shin.jpg');
 
   background-size:cover;
+
   background-position:center;
+
   background-repeat:no-repeat;
+
   background-attachment:fixed;
 }
 
 body::before{
+
   content:"";
+
   position:fixed;
+
   inset:0;
+
   background:rgba(255,255,255,0.72);
+
   z-index:-1;
 }
 
 .container{
+
   width:100%;
+
   max-width:1500px;
+
   margin:auto;
 }
 
@@ -94,9 +108,13 @@ body::before{
 }
 
 .title-icon{
+
   width:80px;
+
   height:80px;
+
   object-fit:cover;
+
   border-radius:18px;
 }
 
@@ -108,13 +126,7 @@ body::before{
 
   display:flex;
 
-  justify-content:space-between;
-
-  align-items:center;
-
-  flex-wrap:wrap;
-
-  gap:20px;
+  justify-content:flex-start;
 
   margin-bottom:25px;
 }
@@ -136,33 +148,6 @@ body::before{
   cursor:pointer;
 }
 
-.export-btn{
-
-  padding:14px 28px;
-
-  border:none;
-
-  border-radius:18px;
-
-  background:#ff6464;
-
-  color:white;
-
-  font-size:22px;
-
-  font-weight:800;
-
-  cursor:pointer;
-
-  border:4px solid black;
-
-  box-shadow:5px 5px 0px black;
-}
-
-.export-btn:hover{
-  transform:translateY(-3px);
-}
-
 /* ========================= */
 /* TABLE */
 /* ========================= */
@@ -181,8 +166,11 @@ body::before{
 }
 
 table{
+
   width:100%;
+
   border-collapse:collapse;
+
   table-layout:fixed;
 }
 
@@ -200,6 +188,7 @@ th{
 }
 
 th:last-child{
+
   border-right:none;
 }
 
@@ -255,6 +244,45 @@ th:last-child{
   cursor:pointer;
 }
 
+/* ========================= */
+/* EXPORT */
+/* ========================= */
+
+.export-wrap{
+
+  text-align:center;
+
+  margin-top:25px;
+}
+
+.export-btn{
+
+  padding:14px 28px;
+
+  border:none;
+
+  border-radius:18px;
+
+  background:#ff6464;
+
+  color:white;
+
+  font-size:22px;
+
+  font-weight:800;
+
+  cursor:pointer;
+
+  border:4px solid black;
+
+  box-shadow:5px 5px 0px black;
+}
+
+.export-btn:hover{
+
+  transform:translateY(-3px);
+}
+
 </style>
 </head>
 
@@ -306,13 +334,6 @@ th:last-child{
 
     </select>
 
-    <button 
-      class="export-btn"
-      onclick="exportPDF()"
-    >
-      📄 Xuất PDF
-    </button>
-
   </div>
 
   <!-- PDF CONTENT -->
@@ -324,6 +345,19 @@ th:last-child{
       <tr id="headerRow"></tr>
 
     </table>
+
+  </div>
+
+  <!-- EXPORT BUTTON -->
+
+  <div class="export-wrap">
+
+    <button 
+      class="export-btn"
+      onclick="exportPDF()"
+    >
+      📄 Xuất PDF
+    </button>
 
   </div>
 
@@ -442,6 +476,10 @@ function createTable(startDate){
               13h - 16h
             </option>
 
+            <option>
+              🌴 Nghỉ
+            </option>
+
           </select>
 
         </div>
@@ -468,7 +506,7 @@ updateWeek();
 
 async function exportPDF(){
 
-  // ẨN TOP BAR KHI XUẤT PDF
+  // ẨN CHỌN TUẦN
   const topBar =
     document.querySelector(".top-bar");
 
@@ -510,7 +548,7 @@ async function exportPDF(){
     pdfHeight
   );
 
-  // HIỆN LẠI TOP BAR
+  // HIỆN LẠI CHỌN TUẦN
   topBar.style.display = "flex";
 
   pdf.save(
